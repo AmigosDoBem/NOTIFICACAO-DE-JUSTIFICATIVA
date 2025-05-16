@@ -1,0 +1,198 @@
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notificação de Justificativa</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 10px;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        .container {
+            max-width: 800px;
+            margin: auto;
+            padding: 10px;
+            border: 2px solid black;
+            border-radius: 8px;
+        }
+        .logo {
+            width: 60px;
+            height: 60px;
+        }
+        .logo img {
+            width: 100%;
+            height: auto;
+        }
+        h2 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+        input[type="text"], select, textarea {
+            width: 100%;
+            padding: 8px;
+            margin-top: 4px;
+            box-sizing: border-box;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+            resize: vertical;
+        }
+        textarea {
+            height: 80px;
+        }
+        .opcoes label {
+            display: inline-block;
+            font-weight: normal;
+            margin-right: 10px;
+        }
+        .buttons {
+            margin-top: 20px;
+            text-align: center;
+        }
+        button {
+            padding: 10px 20px;
+            font-size: 16px;
+            margin: 0 10px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .print-button {
+            background-color: #007bff;
+            color: white;
+        }
+        .reset-button {
+            background-color: #dc3545;
+            color: white;
+        }
+        /* Responsividade */
+        @media (max-width: 600px) {
+            .container {
+                border: none;
+                padding: 5px;
+            }
+            input[type="text"], select, textarea {
+                font-size: 16px;
+            }
+            button {
+                width: 100%;
+                margin: 5px 0;
+            }
+        }
+        /* Ocultar botões na impressão */
+        @media print {
+            .buttons {
+                display: none;
+            }
+        }
+        .error {
+            border-color: red;
+        }
+    </style>
+    <script>
+        // Validação simples em tempo real
+        function validarCampoTexto(el) {
+            if (el.value.trim() === "") {
+                el.classList.add("error");
+            } else {
+                el.classList.remove("error");
+            }
+        }
+
+        function validarFormulario(event) {
+            const camposObrigatorios = document.querySelectorAll("[required]");
+            let valido = true;
+            camposObrigatorios.forEach(campo => {
+                if(campo.value.trim() === "") {
+                    campo.classList.add("error");
+                    valido = false;
+                } else {
+                    campo.classList.remove("error");
+                }
+            });
+            if (!valido) {
+                alert("Por favor, preencha todos os campos obrigatórios.");
+                event.preventDefault();
+            }
+        }
+
+        function imprimirFormulario() {
+            window.print();
+        }
+
+        function resetFormulario() {
+            document.querySelectorAll('input[type="text"], textarea').forEach(input => input.value = '');
+            document.querySelectorAll('input[type="checkbox"]').forEach(input => input.checked = false);
+            document.querySelectorAll('select').forEach(sel => sel.selectedIndex = 0);
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="logo">
+            <img src="img/LogoMarca.png" alt="Logo">
+        </div>
+        
+        <h2>NOTIFICAÇÃO DE JUSTIFICATIVA</h2>
+        <form onsubmit="validarFormulario(event)">
+            <label for="funcionario1">FUNCIONÁRIO:</label>
+            <input type="text" id="funcionario1" name="funcionario1" required oninput="validarCampoTexto(this)">
+            
+            <label>SETOR: CENTRO DE TRANSFORMAÇÃO</label>
+            
+            <label for="funcao1">FUNÇÃO:</label>
+            <select id="funcao1" name="funcao1" required>
+                <option value="">Selecione uma opção</option>
+                <option value="ICL">ICL</option>
+                <option value="AUX. DE AP. SOCIOED.">AUX. DE AP. SOCIOED.</option>
+                <option value="ASSIT. ADM">ASSIT. ADM</option>
+                <option value="AUX ADM">AUX ADM</option>
+                <option value="AUX. DE COZINHA">AUX. DE COZINHA</option>
+                <option value="AUX. DE SERVS. GERAIS">AUX. DE SERVS. GERAIS</option>
+                <option value="COORDENADOR (A) PEDAG.">COORDENADOR (A) PEDAG.</option>
+                <option value="COORDENADOR (A) DE PROJ.">COORDENADOR (A) DE PROJ.</option>
+                <option value="INSPETOR (A)">INSPETOR (A)</option>
+                <option value="INSTRUTOR (A) ESCOLAR">INSTRUTOR (A) ESCOLAR</option>
+                <option value="MENOR APRENDIZ">MENOR APRENDIZ</option>
+                <option value="DIRETOR (A) ESCOLAR">DIRETOR (A) ESCOLAR</option>
+                <option value="PORTEIRO">PORTEIRO</option>
+            </select>
+            
+            <div class="opcoes" style="margin-top:10px;">
+                <label>FOLGA <input type="checkbox" name="folga"> | FALTA <input type="checkbox" name="falta"> | SAÍDA ANTECIPADA <input type="checkbox" name="saida"> | ATRASO <input type="checkbox" name="atraso"> | TRABALHO EXTERNO <input type="checkbox" name="externo"></label><br>
+                <label>PERÍODO: <input type="checkbox" name="manha"> MANHÃ | <input type="checkbox" name="tarde"> TARDE | <input type="checkbox" name="integral"> INTEGRAL</label><br>
+                <label>ESQUECIMENTO: Entrada/manhã <input type="checkbox" name="entradaManha"> | Saída/manhã <input type="checkbox" name="saidaManha"> | Entrada/tarde <input type="checkbox" name="entradaTarde"> | Saída/tarde <input type="checkbox" name="saidaTarde"></label>
+            </div>
+            
+            <label for="data1">DATA DA JUSTIFICATIVA:</label>
+            <input type="text" id="data1" name="data1">
+            
+            <label for="total1">TOTAL:</label>
+            <input type="text" id="total1" name="total1">
+            
+            <label for="justificativa1">JUSTIFICATIVA:</label>
+            <textarea id="justificativa1" name="justificativa1" required oninput="validarCampoTexto(this)"></textarea>
+            
+            <label for="ciente1">CIENTE EM:</label>
+            <input type="text" id="ciente1" name="ciente1" placeholder="____/____/_______">
+            
+            <label>ASSINATURA DO FUNCIONÁRIO/POLEGAR DIREITO:</label>
+            <hr>
+            
+            <div class="buttons">
+                <button type="button" class="print-button" onclick="imprimirFormulario()">Imprimir</button>
+                <button type="button" class="reset-button" onclick="resetFormulario()">Resetar</button>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
