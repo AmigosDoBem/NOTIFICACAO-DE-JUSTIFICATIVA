@@ -1,204 +1,227 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Notificação de Justificativa</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 10px;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        .container {
-            max-width: 800px;
-            margin: auto;
-            padding: 10px;
-            border: 2px solid black;
-            border-radius: 8px;
-        }
-        .logo {
-            width: 60px;
-            height: 60px;
-        }
-        .logo img {
-            width: 100%;
-            height: auto;
-        }
-        h2 {
-            text-align: center;
-            margin-bottom: 20px;
-        }
-        label {
-            display: block;
-            margin-top: 10px;
-            font-weight: bold;
-        }
-        input[type="text"], select, textarea {
-            width: 100%;
-            padding: 8px;
-            margin-top: 4px;
-            box-sizing: border-box;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 14px;
-            resize: vertical;
-        }
-        textarea {
-            height: 80px;
-        }
-        .opcoes label {
-            display: inline-block;
-            font-weight: normal;
-            margin-right: 10px;
-        }
-        .buttons {
-            margin-top: 20px;
-            text-align: center;
-        }
-        button {
-            padding: 10px 20px;
-            font-size: 16px;
-            margin: 0 10px;
-            border: none;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        .print-button {
-            background-color: #007bff;
-            color: white;
-        }
-        .reset-button {
-            background-color: #dc3545;
-            color: white;
-        }
-        @media (max-width: 600px) {
-            .container {
-                border: none;
-                padding: 5px;
-            }
-            input[type="text"], select, textarea {
-                font-size: 16px;
-            }
-            button {
-                width: 100%;
-                margin: 5px 0;
-            }
-        }
-        @media print {
-            .buttons {
-                display: none;
-            }
-        }
-        .error {
-            border-color: red;
-        }
-    </style>
-    <script>
-        function validarCampoTexto(el) {
-            if (el.value.trim() === "") {
-                el.classList.add("error");
-            } else {
-                el.classList.remove("error");
-            }
-        }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Notificação de Justificativa</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
 
-        function validarFormulario(event) {
-            const camposObrigatorios = document.querySelectorAll("[required]");
-            let valido = true;
-            camposObrigatorios.forEach(campo => {
-                if (campo.value.trim() === "") {
-                    campo.classList.add("error");
-                    valido = false;
-                } else {
-                    campo.classList.remove("error");
-                }
-            });
-            if (!valido) {
-                alert("Por favor, preencha todos os campos obrigatórios.");
-                event.preventDefault();
-            }
-        }
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 10px;
+    }
 
-        function imprimirFormulario() {
-            window.print();
-        }
+    .container {
+      max-width: 800px;
+      margin: auto;
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
 
-        function resetFormulario() {
-            document.querySelectorAll('input[type="text"], textarea').forEach(input => input.value = '');
-            document.querySelectorAll('input[type="checkbox"]').forEach(input => input.checked = false);
-            document.querySelectorAll('select').forEach(sel => sel.selectedIndex = 0);
-        }
-    </script>
+    .formulario {
+      padding: 20px;
+      border: 2px solid black;
+      position: relative;
+      background-color: #f9f9f9;
+    }
+
+    .logo {
+      position: absolute;
+      top: 10px;
+      left: 10px;
+      width: 60px;
+      height: 60px;
+    }
+
+    .logo img {
+      width: 100%;
+      height: auto;
+    }
+
+    form label {
+      display: block;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    form input[type="text"],
+    form select,
+    form textarea {
+      width: 100%;
+      padding: 5px;
+      margin-top: 5px;
+      font-size: 14px;
+    }
+
+    .opcoes {
+      border: 2px solid black;
+      padding: 10px;
+      margin-top: 15px;
+      background: #fff;
+    }
+
+    .buttons {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 20px;
+    }
+
+    .print-button,
+    .reset-button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      cursor: pointer;
+    }
+
+    .reset-button {
+      background-color: #dc3545;
+    }
+
+    .linha-corte {
+      border-top: 1px dashed black;
+      margin: 30px 0;
+    }
+
+    @media print {
+      .buttons {
+        display: none;
+      }
+
+      body {
+        margin: 0;
+      }
+    }
+
+    @media (max-width: 600px) {
+      .formulario {
+        padding: 10px;
+      }
+
+      .logo {
+        width: 40px;
+        height: 40px;
+      }
+
+      form label {
+        font-size: 14px;
+      }
+
+      form input[type="text"],
+      form select,
+      form textarea {
+        font-size: 13px;
+      }
+    }
+  </style>
 </head>
 <body>
-    <div class="container">
-        <div class="logo">
-            <img src="img/LogoMarca.png" alt="Logo">
+  <div class="container">
+    <div class="formulario">
+      <div class="logo">
+        <img src="img/LogoMarca.png" alt="Logo" />
+      </div>
+      <h2 style="text-align: center;">NOTIFICAÇÃO DE JUSTIFICATIVA</h2>
+      <form onsubmit="return validarFormulario(this)">
+        <label for="funcionario1">FUNCIONÁRIO:</label>
+        <input type="text" id="funcionario1" name="funcionario1" required />
+
+        <label>SETOR: CENTRO DE TRANSFORMAÇÃO</label>
+        <label for="funcao1">FUNÇÃO:</label>
+        <select id="funcao1" name="funcao1" required>
+          <option value="">Selecione uma opção</option>
+          <option value="ICL">ICL</option>
+          <option value="AUXSOCIO">AUX. DE AP. SOCIOED.</option>
+          <option value="ASSITADM">ASSIT. ADM</option>
+          <option value="AUXADM">AUX ADM</option>
+          <option value="COZINHA">AUX. DE COZINHA</option>
+          <option value="SERVGERAIS">AUX. DE SERVS. GERAIS</option>
+          <option value="COORDPEDAG">COORDENADOR (A) PEDAG.</option>
+          <option value="COORDPROJ">COORDENADOR (A) DE PROJ.</option>
+          <option value="INSPETOR">INSPETOR (A)</option>
+          <option value="INSTRUTOR">INSTRUTOR (A) ESCOLAR</option>
+          <option value="APRENDIZ">MENOR APRENDIZ</option>
+          <option value="DIRETOR">DIRETOR (A) ESCOLAR</option>
+          <option value="PORTEIRO">PORTEIRO</option>
+        </select>
+
+        <div class="opcoes">
+          <label>
+            FOLGA <input type="checkbox" />
+            | FALTA <input type="checkbox" />
+            | SAÍDA ANTECIPADA <input type="checkbox" />
+            | ATRASO <input type="checkbox" />
+            | TRABALHO EXTERNO <input type="checkbox" />
+          </label>
+          <br /><br />
+          <label>
+            PERÍODO:
+            <input type="checkbox" /> MANHÃ |
+            <input type="checkbox" /> TARDE |
+            <input type="checkbox" /> INTEGRAL
+          </label>
+          <br /><br />
+          <label>
+            ESQUECIMENTO:
+            Entrada/manhã <input type="checkbox" /> |
+            Saída/manhã <input type="checkbox" /> |
+            Entrada/tarde <input type="checkbox" /> |
+            Saída/tarde <input type="checkbox" />
+          </label>
         </div>
-        
-        <h2>NOTIFICAÇÃO DE JUSTIFICATIVA</h2>
-        <form onsubmit="validarFormulario(event)">
-            <label for="funcionario1">Funcionário:</label>
-            <input type="text" id="funcionario1" name="funcionario1" required placeholder="Digite o nome" oninput="validarCampoTexto(this)">
-            
-            <label>Setor: Centro de Transformação</label>
-            
-            <label for="funcao1">Função:</label>
-            <select id="funcao1" name="funcao1" required>
-                <option value="">Selecione uma opção</option>
-                <option value="ICL">ICL</option>
-                <option value="Aux. de Ap. Socioed.">Aux. de Ap. Socioed.</option>
-                <option value="Assist. Adm.">Assist. Adm.</option>
-                <option value="Aux. Adm.">Aux. Adm.</option>
-                <option value="Aux. de Cozinha">Aux. de Cozinha</option>
-                <option value="Aux. de Servs. Gerais">Aux. de Servs. Gerais</option>
-                <option value="Coordenador(a) Pedag.">Coordenador(a) Pedag.</option>
-                <option value="Coordenador(a) de Proj.">Coordenador(a) de Proj.</option>
-                <option value="Inspetor(a)">Inspetor(a)</option>
-                <option value="Instrutor(a) Escolar">Instrutor(a) Escolar</option>
-                <option value="Menor Aprendiz">Menor Aprendiz</option>
-                <option value="Diretor(a) Escolar">Diretor(a) Escolar</option>
-                <option value="Porteiro">Porteiro</option>
-            </select>
-            
-            <div class="opcoes" style="margin-top:10px;">
-                <label><input type="checkbox" name="folga"> Folga</label>
-                <label><input type="checkbox" name="falta"> Falta</label>
-                <label><input type="checkbox" name="saida"> Saída antecipada</label>
-                <label><input type="checkbox" name="atraso"> Atraso</label>
-                <label><input type="checkbox" name="externo"> Trabalho externo</label><br><br>
-                <label><input type="checkbox" name="manha"> Manhã</label>
-                <label><input type="checkbox" name="tarde"> Tarde</label>
-                <label><input type="checkbox" name="integral"> Integral</label><br><br>
-                <label>Esquecimento:</label><br>
-                <label><input type="checkbox" name="entradaManha"> Entrada/Manhã</label>
-                <label><input type="checkbox" name="saidaManha"> Saída/Manhã</label>
-                <label><input type="checkbox" name="entradaTarde"> Entrada/Tarde</label>
-                <label><input type="checkbox" name="saidaTarde"> Saída/Tarde</label>
-            </div>
-            
-            <label for="data1">Data da Justificativa:</label>
-            <input type="text" id="data1" name="data1" placeholder="dd/mm/aaaa">
-            
-            <label for="total1">Total:</label>
-            <input type="text" id="total1" name="total1" placeholder="Ex: 2 horas">
-            
-            <label for="justificativa1">Justificativa:</label>
-            <textarea id="justificativa1" name="justificativa1" required placeholder="Descreva o motivo..." oninput="validarCampoTexto(this)"></textarea>
-            
-            <label for="ciente1">Ciente em:</label>
-            <input type="text" id="ciente1" name="ciente1" placeholder="____/____/_______">
-            
-            <label>Assinatura do Funcionário/Polegar Direito:</label>
-            <hr>
-            
-            <div class="buttons">
-                <button type="button" class="print-button" onclick="imprimirFormulario()">Imprimir</button>
-                <button type="button" class="reset-button" onclick="resetFormulario()">Limpar</button>
-            </div>
-        </form>
+
+        <label for="data1">DATA DA JUSTIFICATIVA:</label>
+        <input type="text" id="data1" name="data1" required />
+
+        <label for="total1">TOTAL:</label>
+        <input type="text" id="total1" name="total1" required />
+
+        <label for="justificativa1">JUSTIFICATIVA:</label>
+        <textarea id="justificativa1" name="justificativa1" rows="4" required></textarea>
+
+        <label for="ciente1">CIENTE EM:</label>
+        <input type="text" id="ciente1" name="ciente1" placeholder="____/____/_______" required />
+
+        <label>ASSINATURA DO FUNCIONÁRIO/POLEGAR DIREITO:</label>
+        <hr />
+        <br />
+        <button type="submit" style="display: none;"></button>
+      </form>
     </div>
+  </div>
+
+  <div class="buttons">
+    <button class="print-button" onclick="window.print()">Imprimir</button>
+    <button class="reset-button" onclick="resetFormulario()">Resetar</button>
+  </div>
+
+  <script>
+    function resetFormulario() {
+      document.querySelectorAll('input[type="text"], textarea').forEach(input => input.value = '');
+      document.querySelectorAll('input[type="checkbox"]').forEach(input => input.checked = false);
+      document.querySelectorAll('select').forEach(select => select.value = '');
+    }
+
+    function validarFormulario(form) {
+      const camposObrigatorios = form.querySelectorAll('[required]');
+      for (let campo of camposObrigatorios) {
+        if (!campo.value.trim()) {
+          alert(`⚠ Por favor, preencha o campo: ${campo.previousElementSibling?.innerText || campo.name}`);
+          campo.focus();
+          return false;
+        }
+      }
+      return true;
+    }
+  </script>
 </body>
 </html>
