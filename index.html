@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -74,7 +73,6 @@
             background-color: #dc3545;
             color: white;
         }
-        /* Responsividade */
         @media (max-width: 600px) {
             .container {
                 border: none;
@@ -88,7 +86,6 @@
                 margin: 5px 0;
             }
         }
-        /* Ocultar botões na impressão */
         @media print {
             .buttons {
                 display: none;
@@ -99,7 +96,6 @@
         }
     </style>
     <script>
-        // Validação simples em tempo real
         function validarCampoTexto(el) {
             if (el.value.trim() === "") {
                 el.classList.add("error");
@@ -112,7 +108,7 @@
             const camposObrigatorios = document.querySelectorAll("[required]");
             let valido = true;
             camposObrigatorios.forEach(campo => {
-                if(campo.value.trim() === "") {
+                if (campo.value.trim() === "") {
                     campo.classList.add("error");
                     valido = false;
                 } else {
@@ -144,53 +140,63 @@
         
         <h2>NOTIFICAÇÃO DE JUSTIFICATIVA</h2>
         <form onsubmit="validarFormulario(event)">
-            <label for="funcionario1">FUNCIONÁRIO:</label>
-            <input type="text" id="funcionario1" name="funcionario1" required oninput="validarCampoTexto(this)">
+            <label for="funcionario1">Funcionário:</label>
+            <input type="text" id="funcionario1" name="funcionario1" required placeholder="Digite o nome" oninput="validarCampoTexto(this)">
             
-            <label>SETOR: CENTRO DE TRANSFORMAÇÃO</label>
+            <label>Setor: Centro de Transformação</label>
             
-            <label for="funcao1">FUNÇÃO:</label>
+            <label for="funcao1">Função:</label>
             <select id="funcao1" name="funcao1" required>
                 <option value="">Selecione uma opção</option>
                 <option value="ICL">ICL</option>
-                <option value="AUX. DE AP. SOCIOED.">AUX. DE AP. SOCIOED.</option>
-                <option value="ASSIT. ADM">ASSIT. ADM</option>
-                <option value="AUX ADM">AUX ADM</option>
-                <option value="AUX. DE COZINHA">AUX. DE COZINHA</option>
-                <option value="AUX. DE SERVS. GERAIS">AUX. DE SERVS. GERAIS</option>
-                <option value="COORDENADOR (A) PEDAG.">COORDENADOR (A) PEDAG.</option>
-                <option value="COORDENADOR (A) DE PROJ.">COORDENADOR (A) DE PROJ.</option>
-                <option value="INSPETOR (A)">INSPETOR (A)</option>
-                <option value="INSTRUTOR (A) ESCOLAR">INSTRUTOR (A) ESCOLAR</option>
-                <option value="MENOR APRENDIZ">MENOR APRENDIZ</option>
-                <option value="DIRETOR (A) ESCOLAR">DIRETOR (A) ESCOLAR</option>
-                <option value="PORTEIRO">PORTEIRO</option>
+                <option value="Aux. de Ap. Socioed.">Aux. de Ap. Socioed.</option>
+                <option value="Assist. Adm.">Assist. Adm.</option>
+                <option value="Aux. Adm.">Aux. Adm.</option>
+                <option value="Aux. de Cozinha">Aux. de Cozinha</option>
+                <option value="Aux. de Servs. Gerais">Aux. de Servs. Gerais</option>
+                <option value="Coordenador(a) Pedag.">Coordenador(a) Pedag.</option>
+                <option value="Coordenador(a) de Proj.">Coordenador(a) de Proj.</option>
+                <option value="Inspetor(a)">Inspetor(a)</option>
+                <option value="Instrutor(a) Escolar">Instrutor(a) Escolar</option>
+                <option value="Menor Aprendiz">Menor Aprendiz</option>
+                <option value="Diretor(a) Escolar">Diretor(a) Escolar</option>
+                <option value="Porteiro">Porteiro</option>
             </select>
             
             <div class="opcoes" style="margin-top:10px;">
-                <label>FOLGA <input type="checkbox" name="folga"> | FALTA <input type="checkbox" name="falta"> | SAÍDA ANTECIPADA <input type="checkbox" name="saida"> | ATRASO <input type="checkbox" name="atraso"> | TRABALHO EXTERNO <input type="checkbox" name="externo"></label><br>
-                <label>PERÍODO: <input type="checkbox" name="manha"> MANHÃ | <input type="checkbox" name="tarde"> TARDE | <input type="checkbox" name="integral"> INTEGRAL</label><br>
-                <label>ESQUECIMENTO: Entrada/manhã <input type="checkbox" name="entradaManha"> | Saída/manhã <input type="checkbox" name="saidaManha"> | Entrada/tarde <input type="checkbox" name="entradaTarde"> | Saída/tarde <input type="checkbox" name="saidaTarde"></label>
+                <label><input type="checkbox" name="folga"> Folga</label>
+                <label><input type="checkbox" name="falta"> Falta</label>
+                <label><input type="checkbox" name="saida"> Saída antecipada</label>
+                <label><input type="checkbox" name="atraso"> Atraso</label>
+                <label><input type="checkbox" name="externo"> Trabalho externo</label><br><br>
+                <label><input type="checkbox" name="manha"> Manhã</label>
+                <label><input type="checkbox" name="tarde"> Tarde</label>
+                <label><input type="checkbox" name="integral"> Integral</label><br><br>
+                <label>Esquecimento:</label><br>
+                <label><input type="checkbox" name="entradaManha"> Entrada/Manhã</label>
+                <label><input type="checkbox" name="saidaManha"> Saída/Manhã</label>
+                <label><input type="checkbox" name="entradaTarde"> Entrada/Tarde</label>
+                <label><input type="checkbox" name="saidaTarde"> Saída/Tarde</label>
             </div>
             
-            <label for="data1">DATA DA JUSTIFICATIVA:</label>
-            <input type="text" id="data1" name="data1">
+            <label for="data1">Data da Justificativa:</label>
+            <input type="text" id="data1" name="data1" placeholder="dd/mm/aaaa">
             
-            <label for="total1">TOTAL:</label>
-            <input type="text" id="total1" name="total1">
+            <label for="total1">Total:</label>
+            <input type="text" id="total1" name="total1" placeholder="Ex: 2 horas">
             
-            <label for="justificativa1">JUSTIFICATIVA:</label>
-            <textarea id="justificativa1" name="justificativa1" required oninput="validarCampoTexto(this)"></textarea>
+            <label for="justificativa1">Justificativa:</label>
+            <textarea id="justificativa1" name="justificativa1" required placeholder="Descreva o motivo..." oninput="validarCampoTexto(this)"></textarea>
             
-            <label for="ciente1">CIENTE EM:</label>
+            <label for="ciente1">Ciente em:</label>
             <input type="text" id="ciente1" name="ciente1" placeholder="____/____/_______">
             
-            <label>ASSINATURA DO FUNCIONÁRIO/POLEGAR DIREITO:</label>
+            <label>Assinatura do Funcionário/Polegar Direito:</label>
             <hr>
             
             <div class="buttons">
                 <button type="button" class="print-button" onclick="imprimirFormulario()">Imprimir</button>
-                <button type="button" class="reset-button" onclick="resetFormulario()">Resetar</button>
+                <button type="button" class="reset-button" onclick="resetFormulario()">Limpar</button>
             </div>
         </form>
     </div>
